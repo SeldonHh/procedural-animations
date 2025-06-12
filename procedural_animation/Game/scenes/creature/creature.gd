@@ -1,18 +1,22 @@
 extends Node2D
 
-@export var body_sizes : Array[int] = [15,13,12,11,10,12,14,15,17,19,20,19,16,15,13,12,11,10,10,10]
+@export var body_sizes : Array[int] = [18,21,18,16,16,16,16,16,15,15,15,15,15,15,15,14,14,14,14,14,12,12,12,12,12,10,10,10,10,9,9,9,8,8]
 var structure_point_scene = preload("res://Game/scenes/structure_point.tscn")
 var head : Structure_Point = null
 var structure_points : Array[Structure_Point] = []
 var points : Array[Vector2]
-var body_color : Color = Color.WEB_MAROON
-var outline_color : Color = Color.WHITE
+@export var body_color : Color = Color.WEB_MAROON
+@export var outline_color : Color = Color.WHITE
+@export var show_outline : bool = false
 
 func _draw() -> void:
 	draw_polygon(points,[body_color])
+	draw_circle(head.to_global(head.left/2.4),4,Color.BLACK)
+	draw_circle(head.to_global(head.right/2.4),4,Color.BLACK)
 
 func _ready() -> void:
 	$Line2D.default_color = outline_color
+	$Line2D.visible = show_outline
 	for i in len(body_sizes):
 		var new_point = structure_point_scene.instantiate()
 		new_point.position.x = i * 500/len(body_sizes)

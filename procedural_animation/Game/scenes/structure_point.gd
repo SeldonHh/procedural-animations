@@ -21,5 +21,5 @@ func _process(delta: float) -> void:
 	
 	if head:
 		var direction : Vector2 = Input.get_vector("left","right","up","down")
-		var velocity : Vector2 = direction * 220 * delta
+		var velocity : Vector2 = direction * 300 * delta
 		position += velocity
