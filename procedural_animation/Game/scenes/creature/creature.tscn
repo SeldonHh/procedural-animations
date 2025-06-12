@@ -9,4 +9,4 @@ script = ExtResource("1_f7fuc")
 
 [node name="Line2D" type="Line2D" parent="."]
 closed = true
-width = 5.0
+width = 1.0
