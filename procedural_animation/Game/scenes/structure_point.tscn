@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfhyoxgys67yk"]
+
+[ext_resource type="Script" uid="uid://b0drv8kfk8hc6" path="res://Game/scenes/structure_point.gd" id="1_pb58y"]
+
+[node name="Structure_Point" type="Node2D"]
+script = ExtResource("1_pb58y")
