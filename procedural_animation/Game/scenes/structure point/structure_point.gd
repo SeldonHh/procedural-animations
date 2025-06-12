@@ -9,6 +9,21 @@ var left : Vector2
 var right : Vector2
 var parametric : Vector2
 var parent : Node2D = null
+var head_directions : Array[Vector2] = [
+Vector2.UP,
+Vector2(1,-1),
+Vector2.RIGHT,
+Vector2(1,1),
+Vector2.DOWN,
+Vector2(-1,1),
+Vector2.LEFT,
+Vector2(-1,-1)]
+var head_direction : Vector2 = Vector2.LEFT
+var direction : Vector2 = Vector2.LEFT
+
+func _ready() -> void:
+	if head:
+		$Timer.start()
 
 func _process(delta: float) -> void:
 	if next_point != null:
@@ -20,6 +35,43 @@ func _process(delta: float) -> void:
 		right = Vector2(parametric.y,-parametric.x)
 	
 	if head:
-		var direction : Vector2 = Input.get_vector("left","right","up","down")
+		direction = lerp(direction,head_direction,0.05)
 		var velocity : Vector2 = direction * 300 * delta
 		position += velocity
+
+
+func _on_timer_timeout() -> void:
+	var head_direction_id = head_directions.find(head_direction)
+	if head_direction_id < 6 and head_direction_id > 1:
+		head_direction = [
+			head_directions[head_direction_id-2],
+			head_directions[head_direction_id-1],
+			head_directions[head_direction_id+1],
+			head_directions[head_direction_id+2]].pick_random()
+	elif head_direction_id == 7:
+		head_direction = [
+		head_directions[head_direction_id-2],
+		head_directions[head_direction_id-1],
+		head_directions[0],
+		head_directions[1]].pick_random()
+
+	elif head_direction_id == 0:
+		head_direction = [
+		head_directions[6],
+		head_directions[7],
+		head_directions[head_direction_id+1],
+		head_directions[head_direction_id+2]].pick_random()
+	elif head_direction_id == 6:
+		head_direction = [
+			head_directions[head_direction_id-2],
+			head_directions[head_direction_id-1],
+			head_directions[head_direction_id+1],
+			head_directions[0]].pick_random()
+	elif head_direction_id == 1:
+		head_direction = [
+			head_directions[7],
+			head_directions[head_direction_id-1],
+			head_directions[head_direction_id+1],
+			head_directions[head_direction_id+2]].pick_random()
+
+	$Timer.wait_time = randf_range(0.3,0.5)

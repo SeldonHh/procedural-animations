@@ -34,6 +34,7 @@ func _ready() -> void:
 			structure_points[i].next_point = structure_points[i+1]
 		
 func _process(_delta: float) -> void:
+	$Camera2D.global_position = head.global_position
 	$Line2D.points = points
 	points.clear()
 	points.append(head.to_global(head.right - head.parametric))
