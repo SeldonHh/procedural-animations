@@ -5,23 +5,32 @@ var structure_point_scene = preload("res://Game/scenes/structure point/structure
 var head : Structure_Point = null
 var structure_points : Array[Structure_Point] = []
 var points : Array[Vector2]
-@export var body_color : Color = Color.WEB_MAROON
+@export var body_color : Color = Color(randf_range(0,1),randf_range(0,1),randf_range(0,1))
 @export var outline_color : Color = Color.WHITE
 @export var show_outline : bool = false
+var draw_filling : bool = false
+@export var spawn_lenght : float = 500.0
+@export var main_creature : bool = false
 
 func _draw() -> void:
 	#FILLING
-	draw_polygon(points,[body_color])
+	if draw_filling:
+		draw_polygon(points,[body_color])
+	else:
+		draw_filling = true
 	#DETAILS
-	draw_circle(head.to_global(head.left/2.4),4,Color.BLACK)
-	draw_circle(head.to_global(head.right/2.4),4,Color.BLACK)
+	draw_circle(head.to_global(head.left/2.4),3,Color.BLACK)
+	draw_circle(head.to_global(head.right/2.4),3,Color.BLACK)
+	
 
 func _ready() -> void:
+	if !main_creature:
+		$Camera2D.enabled = false
 	$Line2D.default_color = outline_color
 	$Line2D.visible = show_outline
 	for i in len(body_sizes):
 		var new_point = structure_point_scene.instantiate()
-		new_point.position.x = i * 500/len(body_sizes)
+		new_point.position.x = i * spawn_lenght/float(len(body_sizes))
 		new_point.radius = body_sizes[i]
 		new_point.parent = self
 		if i == 0:
@@ -38,7 +47,8 @@ func _process(_delta: float) -> void:
 	$Line2D.points = points
 	points.clear()
 	points.append(head.to_global(head.right - head.parametric))
-	points.append(head.to_global(-head.parametric * 1.5))
+	points.append(head.to_global(-head.parametric * 1.4 + head.right * 0.2))
+	points.append(head.to_global(-head.parametric * 1.4 + head.left * 0.2))
 	points.append(head.to_global(head.left - head.parametric))
 	for structure in structure_points:
 		points.append(structure.to_global(structure.left))
