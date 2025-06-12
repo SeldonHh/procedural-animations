@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var body_sizes : Array[int] = [18,21,18,16,16,16,16,16,15,15,15,15,15,15,15,14,14,14,14,14,12,12,12,12,12,10,10,10,10,9,9,9,8,8]
-var structure_point_scene = preload("res://Game/scenes/structure_point.tscn")
+var structure_point_scene = preload("res://Game/scenes/structure point/structure_point.tscn")
 var head : Structure_Point = null
 var structure_points : Array[Structure_Point] = []
 var points : Array[Vector2]
@@ -10,7 +10,9 @@ var points : Array[Vector2]
 @export var show_outline : bool = false
 
 func _draw() -> void:
+	#FILLING
 	draw_polygon(points,[body_color])
+	#DETAILS
 	draw_circle(head.to_global(head.left/2.4),4,Color.BLACK)
 	draw_circle(head.to_global(head.right/2.4),4,Color.BLACK)
 
