@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://b55ch48sxthsn"]
+
+[ext_resource type="Script" uid="uid://b0drv8kfk8hc6" path="res://Game/scenes/structure point/structure_point.gd" id="1_37kl0"]
+
+[node name="Test" type="Node2D"]
+
+[node name="Structure_Point" type="Node2D" parent="."]
+position = Vector2(-17, 0)
+script = ExtResource("1_37kl0")
+metadata/_custom_type_script = "uid://b0drv8kfk8hc6"
+
+[node name="Structure_Point2" type="Node2D" parent="."]
+position = Vector2(-6, 0)
+script = ExtResource("1_37kl0")
+metadata/_custom_type_script = "uid://b0drv8kfk8hc6"
+
+[node name="Structure_Point3" type="Node2D" parent="."]
+position = Vector2(2, 0)
+script = ExtResource("1_37kl0")
+metadata/_custom_type_script = "uid://b0drv8kfk8hc6"
+
+[node name="Structure_Point4" type="Node2D" parent="."]
+position = Vector2(28, 0)
+script = ExtResource("1_37kl0")
+metadata/_custom_type_script = "uid://b0drv8kfk8hc6"
+
+[node name="Structure_Point5" type="Node2D" parent="."]
+position = Vector2(55, 1)
+script = ExtResource("1_37kl0")
+metadata/_custom_type_script = "uid://b0drv8kfk8hc6"
